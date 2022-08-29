@@ -5,16 +5,16 @@
 <mapper namespace="replyMapper">
 
 	<!-- View comment -->
-	<select id="readReply" resultType="com.board.domain.ReplyVO">
+	<select id="readReply" resultType="com.ticket.model.ReplyVO">
     	SELECT
     		  RID, CONTENT, WRITER, USERPASS, CREATE_DATE
-    	FROM BOARD_REPLY
+    	FROM TICKET_REPLY
     	WHERE ID = #{id}
 	</select>
 	
 	<!-- Write comment -->
 	<insert id="writeReply">
-		INSERT INTO BOARD_REPLY(
+		INSERT INTO TICKET_REPLY(
 			ID, CONTENT, WRITER, USERPASS, CREATE_DATE)
 		VALUES(#{id}, #{content},#{writer}, #{userpass}, #{create_date})
 	</insert>

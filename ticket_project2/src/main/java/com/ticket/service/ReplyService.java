@@ -1,10 +1,10 @@
-package com.board.dao;
+package com.ticket.service;
 
 import java.util.List;
 
-import com.board.domain.ReplyVO;
+import com.ticket.model.ReplyVO;
 
-public interface ReplyDAO {
+public interface ReplyService {
 	
 	// View comments
 	public List<ReplyVO> readReply(int id) throws Exception;

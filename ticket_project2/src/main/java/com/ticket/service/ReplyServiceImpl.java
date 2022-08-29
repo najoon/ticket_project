@@ -1,4 +1,4 @@
-package com.board.service;
+package com.ticket.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.board.dao.ReplyDAO;
-import com.board.domain.ReplyVO;
+import com.ticket.dao.ReplyDAO;
+import com.ticket.model.ReplyVO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService{

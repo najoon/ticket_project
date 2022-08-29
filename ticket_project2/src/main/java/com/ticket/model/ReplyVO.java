@@ -1,4 +1,4 @@
-package com.board.domain;
+package com.ticket.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.board.dao;
+package com.ticket.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.board.domain.ReplyVO;
+import com.ticket.model.ReplyVO;
 
 
 @Repository

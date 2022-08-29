@@ -1,7 +1,5 @@
-package com.board.controller;
+package com.ticket.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,20 +8,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.board.domain.BoardVO;
-import com.board.domain.Criteria;
-import com.board.domain.PageMaker;
-import com.board.domain.ReplyVO;
-import com.board.service.BoardService;
-import com.board.service.ReplyService;
+import com.ticket.model.Criteria;
+import com.ticket.model.PageMaker;
+import com.ticket.model.ReplyVO;
+import com.ticket.model.TicketVO;
+import com.ticket.service.ReplyService;
+import com.ticket.service.TicketService;
 
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 
 
 
@@ -34,35 +30,35 @@ import lombok.extern.slf4j.Slf4j;
 
 @Builder
 @Controller
-@RequestMapping("/board/*")
-public class BoardController {
+@RequestMapping("/ticket/*")
+public class TicketController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TicketController.class);
 	
 	@Inject
-	BoardService service;
+	TicketService service;
 	
 	@Inject
 	ReplyService replyService;
 	
-	// Bulletin board writing screen
-	@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/ticket/writeView", method = RequestMethod.GET)
 	public void writeView() throws Exception{
 		logger.info("writeView");
 		
 	}
-	// Write a bulletin board
-	@RequestMapping(value = "/board/write", method = RequestMethod.POST)
-	public String write(BoardVO boardVO) throws Exception{
+
+	@RequestMapping(value = "/ticket/write", method = RequestMethod.POST)
+	public String write(TicketVO ticketVO) throws Exception{
 		logger.info("write");
-		String category = boardVO.getCategory();
+		String category = ticketVO.getCategory();
 		
-		service.write(boardVO);
+		service.write(ticketVO);
 		
-		return "redirect:/board/list_"+category;
+		return "redirect:/ticket/list_"+category;
 	}
 		
-	// Bulletin board list inquiry
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, Criteria cri) throws Exception{
 		logger.info("list");
@@ -75,32 +71,31 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "board/list";
+		return "ticket/list";
 	}
 		
-	// Post list_Toys lookup
-	@RequestMapping(value = "/list_Toys", method = RequestMethod.GET)
-	public String list_Toys(Model model, Criteria cri) throws Exception{
-		logger.info("list_Toys");
+
+	@RequestMapping(value = "/list_Cgv", method = RequestMethod.GET)
+	public String list_Cgv(Model model, Criteria cri) throws Exception{
+		logger.info("list_Cgv");
 		
-		model.addAttribute("list_Toys",service.list_Toys(cri));
+		model.addAttribute("list_Cgv",service.list_Cgv(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		String category = "Toys";
-		pageMaker.setTotalCount(service.listCount2("Toys"));
+		String category = "Cgv";
+		pageMaker.setTotalCount(service.listCount2("Cgv"));
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "board/list_Toys";
+		return "ticket/list_Cgv";
 	}
+
+	@RequestMapping(value = "/list_Lot", method = RequestMethod.GET)
+	public String list_Lot(Model model, Criteria cri) throws Exception{
+		logger.info("list_Lot");
 		
-	// Post list_Clothes lookup
-	@RequestMapping(value = "/list_Clothes", method = RequestMethod.GET)
-	public String list_Clothes(Model model, Criteria cri) throws Exception{
-		logger.info("list_Clothes");
-		
-		model.addAttribute("list_Clothes",service.list_Clothes(cri));
+		model.addAttribute("list_Lot",service.list_Lot(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -108,10 +103,10 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "board/list_Clothes";
+		return "ticket/list_Lot";
 	}
 	
-	// Post list_Fruits lookup
+
 	@RequestMapping(value = "/list_Fruits", method = RequestMethod.GET)
 	public String list_Fruits( Model model, Criteria cri) throws Exception{
 		logger.info("list_Fruits");
@@ -124,15 +119,15 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "board/list_Fruits";
+		return "ticket/list_Fruits";
 	}
 	
-	// Post list_Electronics lookup
-	@RequestMapping(value = "/list_Electronics", method = RequestMethod.GET)
-	public String list_Electronics( Model model, Criteria cri) throws Exception{
-		logger.info("list_Electronics");
+
+	@RequestMapping(value = "/list_Mega", method = RequestMethod.GET)
+	public String list_Mega( Model model, Criteria cri) throws Exception{
+		logger.info("list_Mega");
 		
-		model.addAttribute("list_Electronics",service.list_Electronics(cri));
+		model.addAttribute("list_Mega",service.list_Mega(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -141,12 +136,12 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return "board/list_Electronics";
+		return "ticket/list_Mega";
 	}
 	
-	// View post
+
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(BoardVO boardVO, Model model) throws Exception{
+	public String read(TicketVO boardVO, Model model) throws Exception{
 		logger.info("read");
 		
 		model.addAttribute("read", service.read(boardVO.getId()));
@@ -154,43 +149,42 @@ public class BoardController {
 		List<ReplyVO> replyList = replyService.readReply(boardVO.getId());
 		model.addAttribute("replyList", replyList);
 		
-		return "board/readView";
+		return "ticket/readView";
 	}
 	
-	// Post Edit View
+
 	@RequestMapping(value = "/updateView", method = RequestMethod.GET)
-	public String updateView(BoardVO boardVO, Model model) throws Exception{
+	public String updateView(TicketVO boardVO, Model model) throws Exception{
 		logger.info("updateView");
 		
 		model.addAttribute("update", service.read(boardVO.getId()));
 		
-		return "board/updateView";
+		return "ticket/updateView";
 	}
 	
-	// Post Edit
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(BoardVO boardVO) throws Exception{
+	public String update(TicketVO boardVO) throws Exception{
 		
 		logger.info("update");
 		String category = boardVO.getCategory();
 		service.update(boardVO);
 		
 		
-		return "redirect:/board/list_"+category;
+		return "redirect:/ticket/list_"+category;
 	}
 
-	// Delete a Post
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String delete(BoardVO boardVO) throws Exception{
+	public String delete(TicketVO boardVO) throws Exception{
 		
 		logger.info("delete");
 		service.delete(boardVO.getId());
 		
-		return "redirect:/board/list";
+		return "redirect:/ticket/list";
 	}
 	
-	// Write comment
-	@RequestMapping(value="board/replyWrite", method = RequestMethod.POST)
+
+	@RequestMapping(value="ticket/replyWrite", method = RequestMethod.POST)
 	public String replyWrite(ReplyVO vo,  RedirectAttributes rttr) throws Exception {
 		logger.info("reply Write");
 		
@@ -198,7 +192,7 @@ public class BoardController {
 		
 		rttr.addAttribute("id", vo.getId());
 		
-		return "redirect:/board/readView";
+		return "redirect:/ticket/readView";
 	}
 
 	

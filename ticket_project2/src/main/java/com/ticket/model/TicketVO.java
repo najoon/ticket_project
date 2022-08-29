@@ -1,8 +1,7 @@
-package com.board.domain;
+package com.ticket.model;
 
-import java.util.Date;
 
-public class BoardVO {
+public class TicketVO {
 	
 	private int id;
 	private String writer;

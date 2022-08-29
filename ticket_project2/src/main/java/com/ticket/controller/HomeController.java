@@ -1,4 +1,4 @@
-package com.board.controller;
+package com.ticket.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

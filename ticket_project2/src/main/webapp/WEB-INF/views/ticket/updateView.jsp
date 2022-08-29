@@ -99,7 +99,7 @@
 			
 			$(".cancel_btn").on("click", function(){
 				event.preventDefault();
-				location.href = "/board/list";
+				location.href = "/ticket/list";
 			})
 		})
 	</script>
@@ -111,7 +111,7 @@
 				if(fn_valiChk()){
 					return false;
 				}
-				formObj.attr("action", "/board/update");
+				formObj.attr("action", "/ticket/update");
 				formObj.attr("method", "post");
 				formObj.submit();
 			});
@@ -130,7 +130,7 @@
 <body>
   <div class="container">
     <header>
-      <a href="http://localhost:8080/board/list"><h1>예약</h1></a>
+      <a href="http://localhost:8080/ticket/list"><h1>예약</h1></a>
       
     </header>
     <section class="content">
@@ -138,7 +138,7 @@
       <h4>게시글 수정</h4>
 			<hr>
 			<section id="container">
-				<form name="updateForm" role="form" method="post" action="/board/update">
+				<form name="updateForm" role="form" method="post" action="/ticket/update">
 				<input type="hidden" name="id" value="${update.id}" readonly="readonly"/>
 					<table>
 						<tbody>
@@ -149,16 +149,13 @@
 								</td>
 							</tr>
 							<tr>	
-								<td>
-									<label for="userpass">비밀번호</label><input type="text" id="userpass" name="userpass" value="${update.userpass}" class="chk" title="비밀번호를 입력하세요" />
-								</td>
+								
 								<td>
 									카테고리
 									<select name="category" value="${update.category}">				
-									    <option value="Toys">Toys</option>
-									    <option value="Clothes">Clothes</option>
-									    <option value="Fruits">Fruits</option>
-									    <option value="Electronics">Electronics</option>
+									    <option value="Cgv">CGV</option>
+									    <option value="Lot">롯데시네</option>
+									    <option value="Mega">메가박스</option>
 									</select>
 								</td>
 							</tr>
@@ -220,15 +217,14 @@
 
         <ul>
 	        
-	          <a href ="http://localhost:8080/board/list"><li>- ALL</li></a>
-	          <a href ="http://localhost:8080/board/list_Toys"><li>- Toys</li></a>
-	          <a href ="http://localhost:8080/board/list_Clothes"><li>- Clothes</li></a>
-	          <a href ="http://localhost:8080/board/list_Fruits"><li>- Fruits</li></a>
-	          <a href ="http://localhost:8080/board/list_Electronics"><li>- Electronics</li></a>
+	          <a href ="http://localhost:8080/ticket/list"><li>- ALL</li></a>
+	          <a href ="http://localhost:8080/ticket/list_Cgv"><li>- CGV</li></a>
+	          <a href ="http://localhost:8080/ticket/list_Lot"><li>- 롯데시네마</li></a>
+	          <a href ="http://localhost:8080/ticket/list_Mega"><li>- 메가박스</li></a>
 	          <br>
 	          <br>
 	          <br>
-	          <a href ="http://localhost:8080/board/writeView"><input type='button', value='글쓰기'/></a>
+	          <a href ="http://localhost:8080/ticket/writeView"><input type='button', value='글쓰기'/></a>
         </ul>
         
          
