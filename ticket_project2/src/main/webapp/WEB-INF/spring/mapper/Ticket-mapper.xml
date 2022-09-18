@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="ticketMapper">
 	
-	<!-- Write a bulletin board -->
+
     <insert id="insert">
     	INSERT INTO ticket_table (WRITER, USERPASS, CATEGORY, CONTENT, COST, STATE, CREATE_DATE)
 				VALUE(#{writer}, #{userpass}, #{category}, #{content},#{cost}, #{state}, #{create_date});
